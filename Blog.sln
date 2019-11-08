@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog", "Blog\Blog.csproj", "{7D0CAC76-E5FF-4324-BFD8-D0EE9479BBC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog", "Blog\Blog.csproj", "{7D0CAC76-E5FF-4324-BFD8-D0EE9479BBC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Controller", "Blog.Controller\Blog.Controller.csproj", "{49AB66EE-8EC8-428C-9429-5D1E50FD7B1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Controller", "Blog.Controller\Blog.Controller.csproj", "{49AB66EE-8EC8-428C-9429-5D1E50FD7B1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Model", "Blog.Model\Blog.Model.csproj", "{8DCFFF0D-371D-413F-AABF-270ED2F2E792}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Model", "Blog.Model\Blog.Model.csproj", "{8DCFFF0D-371D-413F-AABF-270ED2F2E792}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Service", "Blog.Service\Blog.Service.csproj", "{58C040FF-8847-41D9-B227-02D28E5E5997}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Service", "Blog.Service\Blog.Service.csproj", "{58C040FF-8847-41D9-B227-02D28E5E5997}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
