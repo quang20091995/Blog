@@ -119,7 +119,14 @@ namespace Blog
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            app.UseMvcWithAreas();
+            //app.UseMvcWithAreas();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
 
             app.UseCors("EnableCORS");
 
