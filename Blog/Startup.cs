@@ -1,6 +1,6 @@
 namespace Blog
 {
-    using Blog.Helper;
+    using Blog.Transportation.Helper;
     using Blog.Infrastructure;
     using Blog.Model.Models;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,6 +15,7 @@ namespace Blog
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using System;
+    using System.Reflection;
     using System.Text;
 
     public class Startup
@@ -31,7 +32,7 @@ namespace Blog
         {
             services.AddDbContext<BlogDbContext>(item => item.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), target => target.MigrationsAssembly("Blog")));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -99,6 +100,8 @@ namespace Blog
 
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Admin").RequireAuthenticatedUser());
             });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -120,6 +123,7 @@ namespace Blog
             app.UseSpaStaticFiles();
 
             //app.UseMvcWithAreas();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

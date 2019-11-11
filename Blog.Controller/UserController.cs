@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Identity;
     using Newtonsoft.Json.Linq;
-    using Blog.Helper;
+    using Blog.Transportation.Helper;
     using Microsoft.Extensions.Options;
     using System.Threading.Tasks;
     using System;
@@ -17,8 +17,7 @@
     using System.Linq;
 
     [Route("api/[controller]")]
-    [ApiController]
-    public class UserController: ControllerBase
+    public class UserController: Controller
     {
         private readonly UserManager<IdentityUser> userManager;
 
@@ -37,12 +36,6 @@
             this.signManager = signInManager;
             this.jwtToken = jwtToken.Value;
             this.db = db;
-        }
-
-        [HttpGet("[action]")]
-        public IActionResult GetRoles()
-        {
-            return Ok(db.Roles.ToList());
         }
 
         [HttpPost("[action]")]
@@ -134,8 +127,21 @@
             // return error
             ModelState.AddModelError("", "Username/Password was not Found");
             return Unauthorized(new { LoginError = "Please Check the Login Credentials - Ivalid Username/Password was entered" });
-
         }
 
+        [HttpGet("[action]")]
+        public IActionResult getRoles()
+        {
+            return Ok(db.Roles.ToList());
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult getNumbers()
+        {
+            return Ok("abc");
+        }
+
+        public IActionResult getArticles()
+            => Ok(db.Articles.ToList());
     }
 }

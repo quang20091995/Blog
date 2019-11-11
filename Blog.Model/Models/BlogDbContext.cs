@@ -23,6 +23,6 @@
                 );
         }
 
-        DbSet<Article> Articles { get; set; }
+        public DbSet<Article> Articles { get; set; }
     }
 }

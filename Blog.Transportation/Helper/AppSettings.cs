@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Blog.Helper
+namespace Blog.Transportation.Helper
 {
     public class AppSettings
     {
