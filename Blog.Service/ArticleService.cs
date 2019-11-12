@@ -2,33 +2,62 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Blog.Model.Models;
+    using Models;
     using Implements;
+    using Blog.Model.Models;
+    using System;
+    using Microsoft.EntityFrameworkCore;
+
     public class ArticleService : IArticleService
     {
-        public Task<IEnumerable<Article>> CreateArticle(int ArticleId, string ArticleTitle, string ArticleDescription)
+        private readonly BlogDbContext db;
+        public ArticleService(BlogDbContext db)
         {
-            throw new System.NotImplementedException();
+            this.db = db;
         }
 
-        public Task<bool> DeleteArticle(int ArticleId)
+        public async Task<Article> CreateArticle(Article article)
         {
-            throw new System.NotImplementedException();
+            this.db.Articles.Add(article);
+            await this.db.SaveChangesAsync();
+            return article;
         }
 
-        public Task<bool> EditArticle(int ArticleId, string ArticleTitle, string ArticleDescription)
+        public async Task<bool> DeleteArticle(int articleId)
         {
-            throw new System.NotImplementedException();
+            var article = await this.db.Articles.FindAsync(articleId);
+
+            if (article is null) {
+                return false;
+            }
+            this.db.Articles.Remove(article);
+            return true;
         }
 
-        public Task<IEnumerable<Article>> GetArticles()
+        public async Task<bool> EditArticle(Article article)
         {
-            throw new System.NotImplementedException();
+            var edit_article = await this.db.Articles.FindAsync(article.ArticleId);
+
+            if(edit_article is null)
+            {
+                return false;
+            }
+
+            edit_article.ArticleTitle = article.ArticleTitle;
+            edit_article.Description = article.Description;
+            edit_article.CreatedOn = DateTime.Now;
+
+            await this.db.SaveChangesAsync();
+            return true;
+
         }
 
-        public Task<Article> GetDetail(int ArticleId)
-        {
-            throw new System.NotImplementedException();
-        }
+        public async Task<IEnumerable<Article>> GetArticles()
+            => await this.db.Articles.ToListAsync();
+        
+
+        public async Task<Article> GetDetail(int articleId)
+            => await this.db.Articles.FindAsync(articleId);
+
     }
 }
