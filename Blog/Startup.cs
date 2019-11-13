@@ -17,6 +17,8 @@ namespace Blog
     using System;
     using System.Reflection;
     using System.Text;
+    using Blog.Service.Implements;
+    using Blog.Service;
 
     public class Startup
     {
@@ -30,7 +32,9 @@ namespace Blog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BlogDbContext>(item => item.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), target => target.MigrationsAssembly("Blog")));
+            services
+                .AddDbContext<BlogDbContext>(item => item.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), target => target.MigrationsAssembly("Blog")))
+                .AddTransient<IArticleService, ArticleService>();
 
             
 
@@ -148,6 +152,8 @@ namespace Blog
             });
 
             app.SeedDataAsync();
+
+
         }
     }
 }

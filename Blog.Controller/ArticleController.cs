@@ -12,9 +12,10 @@
     using System.Threading.Tasks;
 
     [Route("api/[controller]")]
+    [ApiController]
     public class ArticleController: Controller
     {
-        private readonly IArticleService iarticle_service;
+        private IArticleService iarticle_service;
         public ArticleController(IArticleService iarticle_service)
         {
             this.iarticle_service = iarticle_service;
@@ -23,8 +24,9 @@
         [HttpGet("[action]")]
         //[Authorize(Policy = "RequireAdministratorRole")]
         public IActionResult GetArticles()
-            => Ok(iarticle_service.GetArticles());
-        
+            => Ok(this.iarticle_service.GetArticles().Result);
+
+        [HttpPost("[action]")]
         public IActionResult CreateArticle([FromBody] CreateArticleRequest request)
         {
             // Will hold all the errors related to registration
@@ -83,9 +85,9 @@
             }
         }
 
-        [HttpDelete("[action]")]
+        [HttpDelete("[action]/{param}")]
         //[Authorize(Policy = "RequireAdministratorRole")]
-        public async Task<IActionResult> DeleteArticle(int param)
+        public async Task<IActionResult> DeleteArticle([FromRoute] int param)
         {
             var deleted_status = await iarticle_service.DeleteArticle(param);
             if (deleted_status)
@@ -100,9 +102,9 @@
             return BadRequest();
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{param}")]
         //[Authorize(Policy = "RequireAdministratorRole")]
-        public async Task<IActionResult> DetailArticle(int param)
+        public async Task<IActionResult> DetailArticle([FromRoute] int param)
         {
             var detail = await iarticle_service.GetDetail(param);
 
@@ -111,7 +113,6 @@
                 ArticleTitle = detail.ArticleTitle,
                 CreatedOn = detail.CreatedOn,
                 Description = detail.Description
-
             };
             return Ok(response);
         }
