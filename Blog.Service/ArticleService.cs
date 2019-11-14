@@ -18,8 +18,11 @@
 
         public async Task<Article> CreateArticle(Article article)
         {
-            this.db.Articles.Add(article);
+            await this.db.Articles.AddAsync(article);
+
             await this.db.SaveChangesAsync();
+            
+
             return article;
         }
 
@@ -31,12 +34,13 @@
                 return false;
             }
             this.db.Articles.Remove(article);
+            await this.db.SaveChangesAsync();
             return true;
         }
 
         public async Task<bool> EditArticle(Article article)
         {
-            var edit_article = await this.db.Articles.FindAsync(article.ArticleId);
+            var edit_article = this.db.Articles.Find(article.ArticleId);
 
             if(edit_article is null)
             {
