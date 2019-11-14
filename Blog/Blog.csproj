@@ -26,8 +26,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\login\login.service.ts" />
+    <None Remove="ClientApp\src\app\modelview\LoginModelView.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Blog.Controller\Blog.Controller.csproj" />
     <ProjectReference Include="..\Blog.Transportation\Blog.Transportation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\login\login.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelview\loginModelView.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

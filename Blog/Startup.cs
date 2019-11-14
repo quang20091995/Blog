@@ -122,6 +122,8 @@ namespace Blog
                 app.UseHsts();
             }
 
+            app.UseCors("EnableCORS");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
@@ -136,7 +138,7 @@ namespace Blog
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseCors("EnableCORS");
+            
 
             app.UseSpa(spa =>
             {
